@@ -39,12 +39,20 @@ public class WebViewActivity extends Activity {
   private final BroadcastReceiver broadcastReceiver =
       new BroadcastReceiver() {
         @Override
+        // public void onReceive(Context context, Intent intent) {
+        //   String action = intent.getAction();
+        //   if (ACTION_CLOSE.equals(action)) {
+        //     finish();
+        //   }
+        // }
         public void onReceive(Context context, Intent intent) {
+        if (context.checkCallingPermission("com.spring.money.RECEIVE_MY_BROADCAST") == PackageManager.PERMISSION_GRANTED) {
           String action = intent.getAction();
           if (ACTION_CLOSE.equals(action)) {
             finish();
           }
         }
+    }
       };
 
   private final WebViewClient webViewClient =
